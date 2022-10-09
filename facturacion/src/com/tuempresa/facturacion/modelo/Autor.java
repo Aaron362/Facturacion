@@ -8,7 +8,7 @@ import org.openxava.annotations.*;
 
 import lombok.*;
 @Entity @Getter @Setter
-public class Autor extends Identificable{
+abstract public class Autor extends Identificable{
 
 	@Column(length=50)
 	String nombre;
