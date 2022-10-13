@@ -40,7 +40,7 @@ LocalDate fecha;
 Cliente cliente;
 
 @ElementCollection
-@ListProperties("producto.numero, producto.descripcion,cantidad , importe")
+@ListProperties("producto.numero, producto.descripcion,cantidad , precioPorUnidad, importe")
 Collection<Detalle> detalles;
 
 
