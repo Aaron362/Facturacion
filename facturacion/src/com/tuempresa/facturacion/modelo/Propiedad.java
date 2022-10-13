@@ -1,5 +1,8 @@
 package com.tuempresa.facturacion.modelo;
 
-public class Propiedad {
+import lombok.*;
 
+public class Propiedad {
+	@Getter @Setter
+ int cantidad;
 }
