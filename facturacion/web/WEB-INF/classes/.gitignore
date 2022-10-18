@@ -1,10 +1,11 @@
-/BeansContext.properties
-/GalleryImage.hbm.xml
 /LoginContextFactory.properties
+/facturacion.properties
+/GalleryImage.hbm.xml
 /META-INF/
 /aplicacion.xml
 /controladores.xml
 /dtds/
+/hibernate.cfg.xml
 /Etiquetasfacturacion_es.properties
 /Mensajesfacturacion_es.properties
 /_run/

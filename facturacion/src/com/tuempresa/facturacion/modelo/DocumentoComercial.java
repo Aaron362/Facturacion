@@ -1,9 +1,11 @@
 package com.tuempresa.facturacion.modelo;
 
+import java.math.*;
 import java.time.*;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
@@ -40,10 +42,31 @@ LocalDate fecha;
 Cliente cliente;
 
 @ElementCollection
-@ListProperties("producto.numero, producto.descripcion,cantidad , precioPorUnidad, importe")
-Collection<Detalle> detalles;
+@ListProperties("producto.numero, producto.descripcion, cantidad , precioPorUnidad,"
+		+ " importe+["
+		+ "documentoComercial.porcentajeIVA,"
+		+ "documentoComercial.iva,"
+		+ "documentoComercial.importeTotal"
+		+ "]"
+		)
+private Collection<Detalle> detalles;
 
+@DefaultValueCalculator(CalculadorPorcentajeIVA.class)
+@Digits(integer=2, fraction=0)
+BigDecimal porcentajeIVA;
 
 @Stereotype("MEMO")
 String observaciones;
+
+
+
+@ReadOnly
+@Stereotype("DINERO")
+@Calculation("sum(detalles.importe)*porcentajeIVA/100")
+BigDecimal iva;
+
+@ReadOnly
+@Stereotype("DINERO")
+@Calculation("sum(detalles.importe)+iva")
+	BigDecimal importeTotal;
 }
