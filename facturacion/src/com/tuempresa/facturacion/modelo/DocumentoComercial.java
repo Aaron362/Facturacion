@@ -21,7 +21,7 @@ import lombok.*;
         "cliente;" +
         "detalles;" +
         "observaciones"+
-    "}"
+    "}"//xxxxx
 )
 public class DocumentoComercial extends Identificable {
 
