@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
-import com.tuempres.facturacion.calculadores.*;
-
 import lombok.*;
 
 @Embeddable @Getter @Setter
@@ -18,13 +16,9 @@ public class Detalle {
    Producto producto;
    
    @Stereotype("DINERO")
-   @Depends("precioPorUnidad, cantidad")
+   @Depends("producto.numero, cantidad")
    public BigDecimal getImporte()	{
-	   if(precioPorUnidad==null) return BigDecimal.ZERO;
-	   return new BigDecimal(cantidad).multiply(precioPorUnidad);
+	   if(producto==null 	||	producto.getPrecio()==null) return BigDecimal.ZERO;
+	   return new BigDecimal(cantidad).multiply(producto.getPrecio());
    }
-   @DefaultValueCalculator(value = CalculadorPrecioPorUnidad.class,
-		   properties= @PropertyValue(name= "numeroProducto", from = "producto.numero"))
-   @Stereotype("DINERO")
-   BigDecimal precioPorUnidad;
 }
